@@ -1,5 +1,3 @@
-import Data.List
-
 coda :: [a] -> [a]
 coda [] = []
 coda (x:xs) = xs
@@ -42,11 +40,16 @@ dup (x:xs)
     | elem x xs = dup xs
     | otherwise = x : (dup xs)
 
+infi :: String -> String -> Bool
+infi _ [] = False
+infi x (y:ys)
+    | take (length x) (y:ys) == x = True
+    | otherwise = infi x ys
 
 som :: String -> [String] -> Int
 som _ [] = 0
 som c (f:fs)
-    | isInfixOf c f = (read (last $ spt f) :: Int) + (som c fs)
+    | infi c f = (read (last $ spt f) :: Int) + (som c fs)
     | otherwise = som c fs
 
 sol :: [Char] -> Int
