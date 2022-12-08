@@ -3,7 +3,10 @@ prs m = [[read [x] :: Int | x <- y] | y <- m]
 
 
 lwr :: Int -> [Int] -> Int
-lwr n x = sum $ map (fromEnum . (<n)) x
+lwr _ [] = 0
+lwr n (x:xs)
+    | x < n = 1 + (lwr n xs)
+    | otherwise = 1
 
 vis :: Int -> Int -> [[Int]] -> Int
 vis a o m = product $ map (lwr (m !! a !! o)) [n, s, w, e]
