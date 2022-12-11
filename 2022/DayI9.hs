@@ -10,9 +10,13 @@ prs d (x, y) (l:ls) = case l !! 0 of
 mov :: (Int, Int) -> [(Int, Int)] -> [(Int, Int)]
 mov _ [] = []
 mov (tx, ty) ((px, py) : ls)
-    | and [abs (tx-hx) <= 1, abs (ty-hy) <= 1] = (tx, ty) : (mov (tx, ty) ls)
-    | otherwise = (tx, ty) : (mov (px, py) ls)
-        where (hx, hy) = case ls of
+    | and [dx <= 1, dy <= 1] = (tx, ty) : (mov (tx, ty) ls)
+    | and [dx == 1, dy == 2] = (tx, ty) : (mov (hx, py) ls)
+    | and [dx == 2, dy == 1] = (tx, ty) : (mov (px, hy) ls)
+    | otherwise = (tx, ty) : (mov (div (tx + hx) 2, div (ty + hy) 2) ls)
+        where
+            (dx, dy) = (abs (tx-hx), abs (ty-hy))
+            (hx, hy) = case ls of
                            [] -> (0, 0)
                            (x:_) -> x
 
@@ -23,7 +27,18 @@ dup (x:xs)
     | otherwise = x : (dup xs)
 
 sol :: [Char] -> Int
-sol x = length $ dup $ mov (0, 0) (prs 0 (0, 0) (" " : (lines x)))
+sol x = length $ dup $ c9
+    where
+        teste = prs 0 (0, 0) (" " : (lines x))
+        c1 = mov (0, 0) teste
+        c2 = mov (0, 0) c1
+        c3 = mov (0, 0) c2  
+        c4 = mov (0, 0) c3
+        c5 = mov (0, 0) c4
+        c6 = mov (0, 0) c5
+        c7 = mov (0, 0) c6
+        c8 = mov (0, 0) c7
+        c9 = mov (0, 0) c8
 
 main :: IO ()
 main = do
