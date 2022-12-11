@@ -1,7 +1,7 @@
-num :: [String] -> [Int]
-num [] = []
-num ("":xs) = 0 : (num xs)
-num (x:xs) = (read x :: Int) : (num xs)
+numerate :: [String] -> [Int]
+numerate [] = []
+numerate ("":xs) = 0 : (numerate xs)
+numerate (x:xs) = (read x :: Int) : (numerate xs)
 
 somme :: [Int] -> [Int]
 somme [] = []
@@ -14,10 +14,10 @@ senza l m = [x | x <- l, x /= m]
 top :: [Int] -> Int
 top x = sum [maximum x, maximum $ senza x (maximum x), maximum $ senza (senza x (maximum x)) (maximum $ senza x (maximum x))]
 
-sol :: [Char] -> Int
-sol = top . somme . num . lines
+solve :: [Char] -> Int
+solve = top . somme . numerate . lines
 
 main :: IO ()
 main = do
     input <- readFile "input.txt"
-    print $ sol input
+    print $ solve input
