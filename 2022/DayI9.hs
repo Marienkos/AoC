@@ -13,7 +13,7 @@ mov (tx, ty) ((px, py) : ls)
     | and [dx <= 1, dy <= 1] = (tx, ty) : (mov (tx, ty) ls)
     | and [dx == 1, dy == 2] = (tx, ty) : (mov (hx, py) ls)
     | and [dx == 2, dy == 1] = (tx, ty) : (mov (px, hy) ls)
-    | otherwise = (tx, ty) : (mov (div (tx + hx) 2, div (ty + hy) 2) ls)
+    | otherwise = (tx, ty) : (mov (div (tx+hx) 2, div (ty+hy) 2) ls)
         where
             (dx, dy) = (abs (tx-hx), abs (ty-hy))
             (hx, hy) = case ls of
