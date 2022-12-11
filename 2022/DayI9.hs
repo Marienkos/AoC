@@ -27,7 +27,7 @@ dup (x:xs)
     | otherwise = x : (dup xs)
 
 sol :: [Char] -> Int
-sol x = length $ dup $ c9
+sol x = length $ dup c9
     where
         teste = prs 0 (0, 0) (" " : (lines x))
         c1 = mov (0, 0) teste
