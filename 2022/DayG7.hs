@@ -1,10 +1,6 @@
-coda :: [a] -> [a]
-coda [] = []
-coda (x:xs) = xs
-
 split :: String -> [String]
 split [] = []
-split x = [(takeWhile (/= '/') x)] ++ (split $ coda (dropWhile (/= '/') x))
+split x = [(takeWhile (/= '/') x)] ++ (split $ drop 1 (dropWhile (/= '/') x))
 
 unify :: [String] -> String
 unify [] = []
