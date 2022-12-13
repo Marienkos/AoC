@@ -15,7 +15,7 @@ draw n (x:xs)
     | otherwise = '.' : (draw (n+1) xs)
 
 solve :: [Char] -> [Char]
-solve = draw 0 . evaluate
+solve x = draw 0 $ evaluate x
 
 main :: IO ()
 main = do
