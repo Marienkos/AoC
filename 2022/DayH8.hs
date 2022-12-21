@@ -23,6 +23,4 @@ solve :: [Char] -> Int
 solve = allvisible . parse . lines
 
 main :: IO ()
-main = do
-    input <- readFile "input.txt"
-    print $ solve input
+main = readFile "input.txt" >>= print . solve
