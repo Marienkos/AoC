@@ -16,6 +16,4 @@ solve x = sum $ map cube list
         cube x = sides x list
 
 main :: IO ()
-main = do
-    input <- readFile "input.txt"
-    print $ solve input
+main = readFile "input.txt" >>= print . solve
