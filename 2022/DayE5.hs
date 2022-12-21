@@ -29,6 +29,4 @@ solve :: [Char] -> [Char]
 solve x = map head (execute (lines x) ((length $ nll $ lines x)-1))
 
 main :: IO ()
-main = do
-    input <- readFile "input.txt"
-    print $ solve input
+main = readFile "input.txt" >>= print . solve
