@@ -55,6 +55,4 @@ solve i = minimum [sums x files | x <- folders, 70000000-(sums "/" files)+(sums 
         folders = noduplicates $ folder $ parse " " (lines i)
 
 main :: IO ()
-main = do
-    input <- readFile "input.txt"
-    print $ solve input
+main = readFile "input.txt" >>= print . solve
