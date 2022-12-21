@@ -18,6 +18,4 @@ solve :: [Char] -> [Char]
 solve x = draw 0 $ evaluate x
 
 main :: IO ()
-main = do
-    input <- readFile "input.txt"
-    putStrLn $ solve input
+main = readFile "input.txt" >>= print . solve
