@@ -14,6 +14,4 @@ solve :: [Char] -> Int
 solve l = sum [evaluate $ split x | x <- lines l]
 
 main :: IO ()
-main = do
-    input <- readFile "input.txt"
-    print $ solve input
+main = readFile "input.txt" >>= print . solve
