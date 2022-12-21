@@ -41,6 +41,4 @@ solve x = length $ noduplicates $ c9
         c9 = move (0, 0) c8
 
 main :: IO ()
-main = do
-    input <- readFile "input.txt"
-    print $ solve input
+main = readFile "input.txt" >>= print . solve
