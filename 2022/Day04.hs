@@ -3,7 +3,7 @@ split x = (takeWhile (/= ',') x, tail $ dropWhile (/= ',') x)
 
 intersect :: [Int] -> [Int] -> Int
 intersect x y
-    | length [e | e <- x, elem e x, elem e y] > 0 = 1
+    | not (null ([e | e <- x, elem e x, elem e y])) = 1
     | otherwise = 0
 
 evaluate :: (String, String) -> Int
