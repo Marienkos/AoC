@@ -5,7 +5,7 @@ parse m = [[read [x] :: Int | x <- y] | y <- m]
 lower :: Int -> [Int] -> Int
 lower _ [] = 0
 lower n (x:xs)
-    | x < n = 1 + (lower n xs)
+    | x < n = 1 + lower n xs
     | otherwise = 1
 
 visible :: Int -> Int -> [[Int]] -> Int
