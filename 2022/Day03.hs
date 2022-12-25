@@ -1,6 +1,6 @@
 tripartize :: [String] -> [[String]]
 tripartize [] = []
-tripartize x = (take 3 x) : (tripartize $ drop 3 x)
+tripartize x = take 3 x : tripartize (drop 3 x)
 
 threepartcommon :: [String] -> [Char]
 threepartcommon l = [commmon x | x <- tripartize l]
@@ -11,7 +11,7 @@ convert l = [letter x | x <- l]
     where letter c = head [x | x <- [1..52], (['a'..'z']++['A'..'Z']) !! (x-1) == c]
 
 solve :: [Char] -> Int
-solve = sum . conv . cml . lines
+solve = sum . convert . threepartcommon . lines
 
 main :: IO ()
 main = readFile "input.txt" >>= print . solve
