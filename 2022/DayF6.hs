@@ -10,4 +10,4 @@ solve :: [Char] -> Int
 solve = sum . val
 
 main :: IO ()
-main = readFile "input.txt" >>= print . solve
+main = readFile "input.txt" >>= print . solve 
