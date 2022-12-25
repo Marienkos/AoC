@@ -1,12 +1,12 @@
 split :: String -> [String]
 split [] = []
-split x = [takeWhile (/= ',') x] ++ (split $ drop 1 (dropWhile (/= ',') x))
+split x = takeWhile (/= ',') x : split (drop 1 (dropWhile (/= ',') x))
 
 parse :: String -> (Int, Int, Int)
-parse x = (read (split x !! 0) :: Int, read (split x !! 1) :: Int, read (split x !! 2) :: Int)
+parse x = (read (head (split x)) :: Int, read (split x !! 1) :: Int, read (split x !! 2) :: Int)
 
 sides :: (Int, Int, Int) -> [(Int, Int, Int)] -> Int
-sides (x, y, z) lava = 6 - (sum $ map (fromEnum . inlist) [(x, y-1, z), (x, y+1, z), (x-1, y, z), (x+1, y, z), (x, y, z-1), (x, y, z+1)])
+sides (x, y, z) lava = 6 - sum (map (fromEnum . inlist) [(x, y-1, z), (x, y+1, z), (x-1, y, z), (x+1, y, z), (x, y, z-1), (x, y, z+1)])
     where inlist element = elem element lava
 
 solve :: [Char] -> Int
