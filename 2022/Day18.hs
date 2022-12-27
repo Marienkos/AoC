@@ -9,10 +9,8 @@ sides :: (Int, Int, Int) -> [(Int, Int, Int)] -> Int
 sides (x, y, z) lava = 6 - sum (map (fromEnum . (`elem` lava)) [(x, y-1, z), (x, y+1, z), (x-1, y, z), (x+1, y, z), (x, y, z-1), (x, y, z+1)])
 
 solve :: [Char] -> Int
-solve x = sum $ map cube list
-    where
-        list = map parse (lines x)
-        cube x = sides x list
+solve x = sum $ map (`sides` list) list
+    where list = map parse (lines x)
 
 main :: IO ()
 main = readFile "input.txt" >>= print . solve
