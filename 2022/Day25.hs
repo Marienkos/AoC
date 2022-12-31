@@ -10,9 +10,6 @@ parse (x:xs) = case x of
 decimal :: [Char] -> Int
 decimal x = sum $ zipWith (*) (reverse $ parse x) [5^n | n <- [0..]]
 
-number :: [Char] -> Int
-number = sum . map decimal . lines
-
 snafu :: Int -> [Char]
 snafu 0 = []
 snafu x = case mod x 5 of
@@ -23,7 +20,7 @@ snafu x = case mod x 5 of
     4 -> '-' : snafu (div x 5 + 1)
 
 solve :: [Char] -> [Char]
-solve = reverse . snafu . number
+solve = reverse . snafu . sum . map decimal . lines
 
 main :: IO ()
 main = readFile "input.txt" >>= print . solve
