@@ -26,4 +26,4 @@ solve :: [Char] -> [Char]
 solve = reverse . snafu . number
 
 main :: IO ()
-main = readFile "./Advent of code 2022/input.txt" >>= print . solve
+main = readFile "input.txt" >>= print . solve
