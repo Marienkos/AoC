@@ -1,14 +1,13 @@
-parse :: [Char] -> [Int]
-parse [] = []
-parse (x:xs) = case x of
-    '1' -> 1 : parse xs
-    '2' -> 2 : parse xs
-    '=' -> -2 : parse xs
-    '-' -> -1 : parse xs
-    '0' -> 0 : parse xs
+parse :: Char -> Int
+parse x = case x of
+    '1' -> 1
+    '2' -> 2
+    '=' -> -2
+    '-' -> -1
+    '0' -> 0
 
 decimal :: [Char] -> Int
-decimal = sum . zipWith (*) [5^n | n <- [0..]] . reverse . parse
+decimal = sum . zipWith (*) [5^n | n <- [0..]] . reverse . map parse
 
 snafu :: Int -> [Char]
 snafu 0 = []
