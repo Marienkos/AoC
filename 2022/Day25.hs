@@ -8,7 +8,7 @@ parse (x:xs) = case x of
     '0' -> 0 : parse xs
 
 decimal :: [Char] -> Int
-decimal x = sum $ zipWith (*) (reverse $ parse x) [5^n | n <- [0..]]
+decimal = sum . zipWith (*) [5^n | n <- [0..]] . reverse . parse
 
 snafu :: Int -> [Char]
 snafu 0 = []
