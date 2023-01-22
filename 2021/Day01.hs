@@ -8,4 +8,4 @@ solve :: [Char] -> Int
 solve = length . higher . map read . lines
 
 main :: IO ()
-main = readFile "./Advent of code 2021/input.txt" >>= print . solve
+main = readFile "input.txt" >>= print . solve
