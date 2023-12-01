@@ -1,9 +1,8 @@
 convert :: [(Char, String)] -> String -> [Int]
-convert _ [] = []
 convert [] _ = []
 convert (x:xs) y
     | fst x == head y || snd x == take (length (snd x)) y = [read [fst x] :: Int]
-    | otherwise = substring xs y
+    | otherwise = convert xs y
 
 decode :: [Char] -> [Int]
 decode [] = []
