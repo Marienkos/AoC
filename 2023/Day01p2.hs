@@ -4,26 +4,20 @@ isin c (x:xs)
     | c == x = True
     | otherwise = isin c xs
 
-substring :: String -> String -> Bool
-substring _ [] = False
-substring x y
-    | take (length x) y == x = True
-    | otherwise = False
+substring :: [String] -> String -> Int -> (Int, Bool)
+substring _ [] _ = (0, False)
+substring [] _ _ = (0, False)
+substring (x:xs) y n
+    | take (length x) y == x = (n, True)
+    | otherwise = substring xs y (n+1)
 
 decode :: [Char] -> [Int]
 decode [] = []
 decode list@(x:xs)
     | isin x ['1'..'9'] = (read [x] :: Int) : decode xs
-    | substring "one" list = 1 : decode xs
-    | substring "two" list = 2 : decode xs
-    | substring "three" list = 3 : decode xs
-    | substring "four" list = 4 : decode xs
-    | substring "five" list = 5 : decode xs
-    | substring "six" list = 6 : decode xs
-    | substring "seven" list = 7 : decode xs
-    | substring "eight" list = 8 : decode xs
-    | substring "nine" list = 9 : decode xs
+    | snd isNumber = (fst isNumber) : decode xs
     | otherwise = decode xs
+        where isNumber = substring ["one", "two", "three", "four", "five", "six", "seven", "eight", "nine"] list 1
 
 value :: [Int] -> Int
 value list = (head list) * 10 + last list
