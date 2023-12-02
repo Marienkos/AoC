@@ -19,7 +19,7 @@ power :: (Int, Int, Int) -> Int
 power (r, g, b) = r*g*b
 
 solve :: String -> Int
-solve = sum . map power . map (retrieve (0, 0, 0) . map (filter (/= "") . split ' ') . concat . map (split ',') . split ';' . only) . lines
+solve = sum . map power . map (retrieve (0, 0, 0) . map (filter (/= "") . split ' ') . concatMap (split ',') . split ';' . only) . lines
 
 main :: IO ()
 main = readFile "input.txt" >>= print . solve
