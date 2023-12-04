@@ -34,7 +34,7 @@ autoadd :: [(Int, Int)] -> [(Int, Int)]
 autoadd x = addall ((length x)-1) x
 
 solve :: String -> Int
-solve = sum . map snd .autoadd . map (equal . map (filter (/= "") . split ' ') . split '|'. only) . lines
+solve = sum . map snd . autoadd . map (equal . map (filter (/= "") . split ' ') . split '|'. only) . lines
 
 main :: IO ()
 main = readFile "input.txt" >>= print . solve
