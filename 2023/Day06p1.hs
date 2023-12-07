@@ -1,5 +1,5 @@
 split :: String -> [String]
-split _ [] = []
+split [] = []
 split x = takeWhile (/= ' ') x : split (drop 1 (dropWhile (/= ' ') x))
 
 only :: String -> String
