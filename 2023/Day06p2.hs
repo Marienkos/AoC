@@ -1,6 +1,6 @@
-split :: Char -> String -> [String]
+split :: String -> [String]
 split _ [] = []
-split c x = takeWhile (/= c) x : split c (drop 1 (dropWhile (/= c) x))
+split c x = takeWhile (/= ' ') x : split (drop 1 (dropWhile (/= ' ') x))
 
 only :: String -> String
 only [] = []
@@ -15,7 +15,7 @@ innerWays :: [String] -> Int
 innerWays x = ways (read (head x) :: Int) (read (last x) :: Int)
 
 solve :: String -> Int
-solve = innerWays . map (concat . split ' ' . only) . lines
+solve = innerWays . map (concat . split . only) . lines
 
 main :: IO ()
 main = readFile "input.txt" >>= print . solve
