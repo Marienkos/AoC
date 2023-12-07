@@ -18,5 +18,8 @@ allWays (x:xs) (y:ys) = ways (read x :: Int) (read y :: Int) : allWays xs ys
 innerAllWays :: [[String]] -> Int
 innerAllWays x = product (allWays (head x) (last x))
 
+solve :: String -> Int
+solve = innerAllWays . map (filter (/= "") . split ' ' . only) . lines
+
 main :: IO ()
-main = readFile "input.txt" >>= print . innerAllWays . map (filter (/= "") . split ' ' . only) . lines
+main = readFile "input.txt" >>= print . solve
