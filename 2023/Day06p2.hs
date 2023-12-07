@@ -1,6 +1,6 @@
 split :: String -> [String]
-split _ [] = []
-split c x = takeWhile (/= ' ') x : split (drop 1 (dropWhile (/= ' ') x))
+split [] = []
+split x = takeWhile (/= ' ') x : split (drop 1 (dropWhile (/= ' ') x))
 
 only :: String -> String
 only [] = []
