@@ -25,8 +25,8 @@ startpoint :: [String] -> [String]
 startpoint = map head . filter (isStart) . map letters . drop 2
 
 lcmlist :: [Int] -> Int
-lcmlist (a:[]) = a
-lcmlist (a:b:rest) = lcmlist ((lcm a b):rest)
+lcmlist [] = 1
+lcmlist (x:xs) = lcm x (lcmlist xs)
 
 solve :: [String] -> Int
 solve x = lcmlist $ map (endpoint x) (startpoint x)
