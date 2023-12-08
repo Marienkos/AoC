@@ -1,7 +1,3 @@
-split :: String -> [String]
-split [] = []
-split x = takeWhile (/= ' ') x : split (drop 1 (dropWhile (/= ' ') x))
-
 only :: String -> String
 only [] = []
 only x = case drop 1 (dropWhile (/= ':') x) of
@@ -15,7 +11,7 @@ innerWays :: [String] -> Int
 innerWays x = ways (read (head x) :: Int) (read (last x) :: Int)
 
 solve :: String -> Int
-solve = innerWays . map (concat . split . only) . lines
+solve = innerWays . map (concat . words . only) . lines
 
 main :: IO ()
 main = readFile "input.txt" >>= print . solve
