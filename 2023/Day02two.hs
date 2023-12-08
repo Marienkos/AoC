@@ -16,7 +16,7 @@ power r g b (x:xs)
     | last x == "blue" = power r g (maximum [b, read (head x) :: Int]) xs
 
 solve :: String -> Int
-solve = sum . map (power 0 0 0 . map (filter (/= "") . split ' ') . concatMap (split ',') . split ';' . only) . lines
+solve = sum . map (power 0 0 0 . map words . concatMap (split ',') . split ';' . only) . lines
 
 main :: IO ()
 main = readFile "input.txt" >>= print . solve
