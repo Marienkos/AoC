@@ -15,7 +15,7 @@ innerAllWays :: [[String]] -> Int
 innerAllWays x = product (allWays (head x) (last x))
 
 solve :: String -> Int
-solve = innerAllWays . map (filter (/= "") . words . only) . lines
+solve = innerAllWays . map (words . only) . lines
 
 main :: IO ()
 main = readFile "input.txt" >>= print . solve
