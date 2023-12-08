@@ -1,5 +1,5 @@
 letters :: String -> String
-letters s = filter (/= "") $ words $ [x | x <- s, elem x ['A'..'Z'] || x == ' ']
+letters s = words $ [x | x <- s, elem x ['A'..'Z'] || x == ' ']
 
 search :: String -> [[String]] -> (String, String)
 search _ [] = ("", "")
