@@ -9,7 +9,7 @@ split [] = []
 split x = takeWhile (/= ' ') x : split (drop 1 (dropWhile (/= ' ') x))
 
 letters :: String -> String
-letters s = [x | x <- s, isin x ['A'..'Z'] || x == ' ']
+letters s = filter (/= "") $ split $ [x | x <- s, isin x ['A'..'Z'] || x == ' ']
 
 search :: String -> [[String]] -> (String, String)
 search _ [] = ("", "")
@@ -26,7 +26,7 @@ arrive n "ZZZ" _ _ = n
 arrive n s (c:cs) x = arrive (n+1) (direction s c x) cs x
 
 solve :: [String] -> Int
-solve x = arrive 0 "AAA" (concat [head x | n <- [1..]]) $ map (filter (/= "") . split . letters) $ drop 2 x
+solve x = arrive 0 "AAA" (concat [head x | n <- [1..]]) $ map letters $ drop 2 x
 
 main :: IO ()
 main = readFile "input.txt" >>= print . solve . lines
