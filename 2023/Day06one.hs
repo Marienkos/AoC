@@ -1,7 +1,3 @@
-split :: String -> [String]
-split [] = []
-split x = takeWhile (/= ' ') x : split (drop 1 (dropWhile (/= ' ') x))
-
 only :: String -> String
 only [] = []
 only x = case drop 1 (dropWhile (/= ':') x) of
@@ -19,7 +15,7 @@ innerAllWays :: [[String]] -> Int
 innerAllWays x = product (allWays (head x) (last x))
 
 solve :: String -> Int
-solve = innerAllWays . map (filter (/= "") . split . only) . lines
+solve = innerAllWays . map (filter (/= "") . words . only) . lines
 
 main :: IO ()
 main = readFile "input.txt" >>= print . solve
