@@ -17,13 +17,10 @@ search s (x:xs)
     | head x == s = (x!!1, x!!2)
     | otherwise = search s xs
 
-direction :: String -> Char -> [[String]] -> String
-direction s 'L' x = fst (search s x)
-direction s 'R' x = snd (search s x)
-
-arrive :: Int -> String -> [Char] -> [[String]] -> Int
-arrive n "ZZZ" _ _ = n
-arrive n s (c:cs) x = arrive (n+1) (direction s c x) cs x
+direction :: Int -> String -> [Char] -> [[String]] -> Int
+direction n "ZZZ" _ _ = n
+direction n s ('L':cs) x = direction (n+1) (fst $ search s x) cs x
+direction n s ('R':cs) x = direction (n+1) (snd $ search s x) cs x
 
 solve :: [String] -> Int
 solve x = arrive 0 "AAA" (concat [head x | n <- [1..]]) $ map letters $ drop 2 x
