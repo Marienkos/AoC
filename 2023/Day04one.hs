@@ -1,9 +1,3 @@
-isin :: String -> [String] -> Bool
-isin _ [] = False
-isin s (x:xs)
-    | s == x = True
-    | otherwise = isin s xs
-
 split :: Char -> String -> [String]
 split _ [] = []
 split c x = takeWhile (/= c) x : split c (drop 1 (dropWhile (/= c) x))
@@ -15,7 +9,7 @@ only x = case drop 1 (dropWhile (/= ':') x) of
     _ -> drop 1 (dropWhile (/= ':') x)
 
 equal :: [[String]] -> Int
-equal x = length [n | n <- head x, isin n (last x)]
+equal x = length [n | n <- head x, elem n (last x)]
 
 power :: Int -> Int
 power 0 = 0
