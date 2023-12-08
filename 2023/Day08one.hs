@@ -1,4 +1,4 @@
-letters :: String -> String
+letters :: String -> [String]
 letters s = words [x | x <- s, elem x ['A'..'Z'] || x == ' ']
 
 search :: String -> [[String]] -> (String, String)
@@ -13,7 +13,7 @@ direction n s ('L':cs) x = direction (n+1) (fst $ search s x) cs x
 direction n s ('R':cs) x = direction (n+1) (snd $ search s x) cs x
 
 solve :: [String] -> Int
-solve x = arrive 0 "AAA" (concat [head x | n <- [1..]]) $ map letters $ drop 2 x
+solve x = direction 0 "AAA" (concat [head x | n <- [1..]]) $ map letters $ drop 2 x
 
 main :: IO ()
 main = readFile "input.txt" >>= print . solve . lines
