@@ -16,7 +16,7 @@ power 0 = 0
 power n = 2^(n-1)
 
 solve :: String -> Int
-solve = sum . map (power . equal . map (filter (/= "") . split ' ') . split '|'. only) . lines
+solve = sum . map (power . equal . map words . split '|'. only) . lines
 
 main :: IO ()
 main = readFile "input.txt" >>= print . solve
