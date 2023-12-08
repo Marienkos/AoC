@@ -1,15 +1,9 @@
-isin :: Char -> [Char] -> Bool
-isin _ [] = False
-isin c (x:xs)
-    | c == x = True
-    | otherwise = isin c xs
-
 split :: String -> [String]
 split [] = []
 split x = takeWhile (/= ' ') x : split (drop 1 (dropWhile (/= ' ') x))
 
 letters :: String -> String
-letters s = filter (/= "") $ split $ [x | x <- s, isin x ['A'..'Z'] || x == ' ']
+letters s = filter (/= "") $ split $ [x | x <- s, elem x ['A'..'Z'] || x == ' ']
 
 search :: String -> [[String]] -> (String, String)
 search _ [] = ("", "")
