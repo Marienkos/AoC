@@ -1,13 +1,7 @@
-isin :: Char -> [Char] -> Bool
-isin _ [] = False
-isin c (x:xs)
-    | c == x = True
-    | otherwise = isin c xs
-
 decode :: [Char] -> [Int]
 decode [] = []
 decode (x:xs)
-    | isin x ['0'..'9'] = (read [x] :: Int) : decode xs
+    | elem x ['0'..'9'] = (read [x] :: Int) : decode xs
     | otherwise = decode xs
 
 value :: [Int] -> Int
