@@ -9,10 +9,7 @@ split [] = []
 split x = takeWhile (/= ' ') x : split (drop 1 (dropWhile (/= ' ') x))
 
 letters :: String -> String
-letters [] = []
-letters (x:xs)
-    | isin x ['A'..'Z'] || x == ' ' = x : letters xs
-    | otherwise = letters xs
+letters s = [x | x <- s, isin x ['A'..'Z'] || x == ' ']
 
 search :: String -> [[String]] -> (String, String)
 search _ [] = ("", "")
