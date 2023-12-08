@@ -27,7 +27,7 @@ index n (x:xs)
     | otherwise = index (n+1) xs
 
 solve :: String -> Int
-solve = sum . index 1 . map (retrieve (0, 0, 0) . map (filter (/= "") . split ' ') . concatMap (split ',') . split ';' . only) . lines
+solve = sum . index 1 . map (retrieve (0, 0, 0) . map words . concatMap (split ',') . split ';' . only) . lines
 
 main :: IO ()
 main = readFile "input.txt" >>= print . solve
