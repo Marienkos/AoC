@@ -16,13 +16,8 @@ direction n s (c:cs) x
 endpoint :: [String] -> String -> Int
 endpoint x s = direction 0 s (concat [head x | n <- [1..]]) $ map letters $ drop 2 x
 
-isStart :: [String] -> Bool
-isStart l
-    | last (head l) == 'A' = True
-    | otherwise = False
-
 startpoint :: [String] -> [String]
-startpoint = map head . filter (isStart) . map letters . drop 2
+startpoint = map head . filter ((== 'A') . last . head) . map letters . drop 2
 
 lcmlist :: [Int] -> Int
 lcmlist [] = 1
