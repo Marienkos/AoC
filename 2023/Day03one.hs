@@ -13,11 +13,14 @@ check r c m = or
 reversElem :: Eq a => [a] -> a -> Bool
 reversElem a b = elem b a
 
+notAnymore :: String -> Int
+notAnymore s = case elem (head s) "1234567890" of
+    True -> length $ takeWhile (reversElem "1234567890") s
+    False -> length $ takeWhile (not. reversElem "1234567890") s
+
 sep :: String -> [String]
 sep [] = []
-sep s
-    | not $ elem (head s) "1234567890" = takeWhile (not. reversElem "1234567890") s : sep (dropWhile (not. reversElem "1234567890") s)
-    | otherwise = takeWhile (reversElem "1234567890") s : sep (dropWhile (reversElem "1234567890") s)
+sep s = take (notAnymore s) s : sep (drop (notAnymore s) s)
 
 number :: Int -> Int -> [String] -> String
 number _ _ [] = []
@@ -29,11 +32,6 @@ checkedNum :: Int -> Int -> [[Char]] -> String
 checkedNum r c m
     | check r c m = number (length $ head $ sep (m!!r)) c (sep (m!!r))
     | otherwise = []
-
-notAnymore :: String -> Int
-notAnymore s = case elem (head s) "1234567890" of
-    True -> length $ takeWhile (reversElem "1234567890") s
-    False -> length $ takeWhile (not. reversElem "1234567890") s
 
 checkedRow :: Int -> Int -> [[Char]] -> [String]
 checkedRow r c m
