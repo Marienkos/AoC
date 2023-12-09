@@ -1,14 +1,17 @@
 check :: Int -> Int -> [[Char]] -> Bool
 check r c m = or
-    [r > 0 && elem (m!!(r-1)!!c) string,
-     r < (length m)-1 && elem (m!!(r+1)!!c) string,
-     c > 0 && elem (m!!r!!(c-1)) string,
-     c < (length (head m)-1) && elem (m!!r!!(c+1)) string,
-     r > 0 && c > 0 && elem (m!!(r-1)!!(c-1)) string,
-     r > 0 && c < (length (head m)-1) && elem (m!!(r-1)!!(c+1)) string,
-     r < (length m)-1 && c > 0 && elem (m!!(r+1)!!(c-1)) string,
-     r < (length m)-1 && c < (length (head m)-1) && elem (m!!(r+1)!!(c+1)) string]
-        where string = "*#+$&@-%$/()'=^!"
+    [r > 0  &&                  elem (m!!(r-1)!!c) string,
+     r < rmax &&                elem (m!!(r+1)!!c) string,
+                    c > 0 &&    elem (m!!r!!(c-1)) string,
+                    c < cmax && elem (m!!r!!(c+1)) string,
+     r > 0 &&       c > 0 &&    elem (m!!(r-1)!!(c-1)) string,
+     r > 0 &&       c < cmax && elem (m!!(r-1)!!(c+1)) string,
+     r < rmax &&    c > 0 &&    elem (m!!(r+1)!!(c-1)) string,
+     r < rmax &&    c < cmax && elem (m!!(r+1)!!(c+1)) string]
+        where
+            string = "*#+$&@-%$/()'=^!"
+            rmax = (length m)-1
+            cmax = (length (head m)-1)
 
 reversElem :: Eq a => [a] -> a -> Bool
 reversElem a b = elem b a
