@@ -15,8 +15,8 @@ check r c m = or
 
 notAnymore :: String -> Int
 notAnymore s = case elem (head s) "1234567890" of
-    True -> length $ takeWhile ((\a -> \b -> elem b a) "1234567890") s
-    False -> length $ takeWhile (not. (\a -> \b -> elem b a) "1234567890") s
+    True -> length $ takeWhile ((flip elem) "1234567890") s
+    False -> length $ takeWhile (not . (flip elem) "1234567890") s
 
 sep :: String -> [String]
 sep [] = []
