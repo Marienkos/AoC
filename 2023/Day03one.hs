@@ -13,13 +13,10 @@ check r c m = or
             rmax = (length m)-1
             cmax = (length (head m)-1)
 
-reversElem :: Eq a => [a] -> a -> Bool
-reversElem a b = elem b a
-
 notAnymore :: String -> Int
 notAnymore s = case elem (head s) "1234567890" of
-    True -> length $ takeWhile (reversElem "1234567890") s
-    False -> length $ takeWhile (not. reversElem "1234567890") s
+    True -> length $ takeWhile ((\a -> \b -> elem b a) "1234567890") s
+    False -> length $ takeWhile (not. (\a -> \b -> elem b a) "1234567890") s
 
 sep :: String -> [String]
 sep [] = []
