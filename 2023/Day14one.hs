@@ -1,4 +1,4 @@
-transpose:: [[Char]] -> [[Char]]
+transpose :: [[Char]] -> [[Char]]
 transpose ([]:_) = []
 transpose x = (map head x) : transpose (map tail x)
 
