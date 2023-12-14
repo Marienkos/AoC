@@ -21,12 +21,3 @@ solve = load . transpose . map (map fst . sort . update 0) . transpose . lines
 
 main :: IO ()
 main = readFile "input.txt" >>= print . solve
-
-{-
-
-....O#.O#.
-1111023245
-0111122345
-O....#O.#.
-
--}
