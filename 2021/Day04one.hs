@@ -45,9 +45,9 @@ continue (x:xs) y
     | otherwise = continue xs (markAll x y)
 
 finish :: [Int] -> (Int, Int) -> [(Int, [Int])] -> Int
-finish l (a, b) x = a * sum (filter (not . flip elem ((takeWhile (/= a) l)++[a])) (concatMap snd (filter ((== b) . fst) x)))
+finish l (a, b) = (*a) . sum . concatMap (filter (not . flip elem (takeWhile (/= a) l ++ [a])) . snd) . filter ((== b) . fst)
 
-
+solve :: [Char] -> Int
 solve x = finish numbers (continue numbers boards) boards
     where
         boards = split 0 $ map (map read . words) $ tail $ lines x
@@ -55,3 +55,6 @@ solve x = finish numbers (continue numbers boards) boards
 
 main :: IO ()
 main = readFile "input.txt" >>= print . solve
+
+-- perché ignora 23?
+-- errore con elem: non guardare gli elementi successivi!
