@@ -7,5 +7,8 @@ follow (p, d, a) (('f', n):xs) = follow (p+n, d+(a*n), a) xs
 follow (p, d, a) (('d', n):xs) = follow (p, d, a+n) xs
 follow (p, d, a) (('u', n):xs) = follow (p, d, a-n) xs
 
+solve :: [Char] -> Int
+solve = follow (0, 0, 0) . map decode . lines
+
 main :: IO ()
-main = readFile "input.txt" >>= print . follow (0, 0, 0) . map decode . lines
+main = readFile "input.txt" >>= print . solve
