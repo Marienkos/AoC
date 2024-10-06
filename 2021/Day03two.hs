@@ -7,11 +7,8 @@ common n x
 least :: Int -> [[Char]] -> Int
 least n x = 1 - common n x
 
-wrap :: a -> [a]
-wrap x = [x]
-
 cut :: Int -> Int -> [[Char]] -> [[Char]]
-cut n m = filter ((== m) . read . wrap . (!! n))
+cut n m = filter ((== m) . read . flip (:) [] . (!! n))
 
 cutWhile :: Int -> (Int -> [[Char]] -> Int) -> [[Char]] -> [Char]
 cutWhile n f x
@@ -22,7 +19,7 @@ bin :: [Int] -> Int
 bin = sum . zipWith (*) [2^n | n <- [0..]] . reverse
 
 convert :: (Int -> [[Char]] -> Int) -> [Char] -> Int
-convert f = bin . map (read . wrap) . cutWhile 0 f . lines
+convert f = bin . map (read . flip (:) []) . cutWhile 0 f . lines
 
 solve :: [Char] -> Int
 solve x = convert common x * convert least x
