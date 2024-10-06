@@ -22,7 +22,7 @@ bin :: [Int] -> Int
 bin = sum . zipWith (*) [2^n | n <- [0..]] . reverse
 
 convert :: (Int -> [[Char]] -> Int) -> [Char] -> Int
-convert f x = bin $ map (read . wrap) $ cutWhile 0 f (lines x)
+convert f = bin . map (read . wrap) . cutWhile 0 f . lines
 
 solve :: [Char] -> Int
 solve x = convert common x * convert least x
