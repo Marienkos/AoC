@@ -55,6 +55,3 @@ solve x = finish numbers (continue numbers boards) boards
 
 main :: IO ()
 main = readFile "input.txt" >>= print . solve
-
--- perché ignora 23?
--- errore con elem: non guardare gli elementi successivi!
