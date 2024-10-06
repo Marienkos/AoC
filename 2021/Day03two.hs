@@ -11,7 +11,7 @@ wrap :: a -> [a]
 wrap x = [x]
 
 cut :: Int -> Int -> [[Char]] -> [[Char]]
-cut n m x = filter ((== m) . read . wrap . head . drop n) x
+cut n m = filter ((== m) . read . wrap . (!! n))
 
 cutWhile :: Int -> (Int -> [[Char]] -> Int) -> [[Char]] -> [Char]
 cutWhile n f x
