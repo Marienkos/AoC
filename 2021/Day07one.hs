@@ -8,11 +8,11 @@ symmetry a b
     | a > b = b + 2 * (a-b)
     | otherwise = b
 
-solution :: [Int] -> Int -> Int
-solution l n = sum (map (symmetry n) l) - n * length l
+solution :: Int -> [Int] -> Int
+solution n = sum . map (negate . (n-) . symmetry n)
 
 solve :: [Char] -> Int
-solve l = minimum $ map (solution $ decode l) [minimum (decode l)..maximum (decode l)]
+solve l = minimum $ map (flip solution $ decode l) [minimum (decode l)..maximum (decode l)]
 
 main :: IO ()
 main = readFile "input.txt" >>= print . solve
