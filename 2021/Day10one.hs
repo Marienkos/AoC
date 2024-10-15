@@ -1,13 +1,3 @@
-simplify :: [Char] -> [Char]
-simplify [a] = [a]
-simplify (a:b:xs) = case [a, b] of
-    "()" -> simplify xs
-    "[]" -> simplify xs
-    "{}" -> simplify xs
-    "<>" -> simplify xs
-    _ -> a : simplify (b:xs)
-
-
 count :: [Char] -> [Char] -> Char
 count open [] = 'A'
 count open (l:ls)
