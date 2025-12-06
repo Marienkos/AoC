@@ -6,7 +6,7 @@ sign 'L' = -1
 sign 'R' = 1
 
 rotate :: (Int, Bool) -> (Char, Int) -> (Int, Bool)
-rotate (ex, check) (dir, n) = (mod (ex + sign dir * n) 100, ex == 0)
+rotate (ex, _) (dir, n) = (mod (ex + sign dir * n) 100, ex == 0)
 
 solve :: String -> Int
 solve = length . filter snd . scanl rotate (50, False) . map decode . lines
