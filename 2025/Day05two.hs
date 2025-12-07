@@ -37,7 +37,7 @@ unfold :: (Int, Int) -> Int
 unfold (a, b) = b - a + 1
 
 solve :: String -> Int
-solve x = sum . map unfold . newRanges . map intervals . takeWhile (/= "") $ lines x
+solve = sum . map unfold . newRanges . map intervals . takeWhile (/= "") . lines
 
 main :: IO ()
 main = readFile "input.txt" >>= print . solve
