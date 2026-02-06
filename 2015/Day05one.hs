@@ -9,6 +9,7 @@ banned (a:b:c) = notElem [a, b] ["ab", "cd", "pq", "xy"] && banned (b:c)
 nice :: String -> Bool
 nice x = length (filter (flip elem "aeiou") x) > 2 && pairs x && banned x
 
+solve :: String -> Int
 solve = length . filter nice . lines
 
 main :: IO ()
